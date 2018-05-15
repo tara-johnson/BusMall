@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,70 @@
     <link type="text/css" rel="stylesheet" href="css/style.css" />
     <title>BusMall</title>
 </head>
+
 <body>
-    
-    <header>Placeholder</header>
+
+    <header>
+        <nav>
+            <img src="https://placehold.it/100x30/000" />
+            <h1>Busmall</h1>
+            <ul>
+                <li>Contact</li>
+                <li>About</li>
+                <li>Products</li>
+                <li>Home</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <ul id="results">Results:</ul>
+        </section>
+        
+        <section class="voting">
+            <h2>Select your favorite</h2>
+            <ul class="voting">
+                <li>
+                    <img id="product1" />
+                    <fieldset>
+                        <label for="name">Select</label>
+                        <p>
+                            <input type="radio" />
+                        </p>
+                    </fieldset>
+                </li>
+                <li>
+                    <img id="product2" />
+                    <fieldset>
+                        <label for="name">Select</label>
+                        <p>
+                            <input type="radio" />
+                        </p>
+                    </fieldset>
+                </li>
+                <li>
+                    <img id="product3" />
+                    <fieldset>
+                        <label for="name">Select</label>
+                        <p>
+                            <input type="radio" />
+                        </p>
+                    </fieldset>
+                </li>
+            </ul>
+            <div>
+                <button type="submit" id="vote">Vote</button>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum fermentum enim. Nunc eros neque, auctor et dolor a, rhoncus tempus turpis. Vivamus consequat diam vitae imperdiet accumsan. Vivamus eu leo eu lorem lacinia ullamcorper eget fringilla nisi. Donec malesuada, nibh sed feugiat lacinia, felis sem auctor sem, nec facilisis velit massa nec leo. Proin varius, turpis et mollis eleifend tellus turpis eleifend leo, at consectetur ipsum felis ut nulla. Morbi in semper libero.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>Footer goes here</footer>
+
+    <script src="js/app.js"></script>
 
 </body>
+
 </html>

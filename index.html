@@ -11,17 +11,51 @@
 <body>
     
     <header>
-        <nav></nav>
+        <nav>
+            <img src="https://placehold.it/100x30/000" />
+            <h1>Busmall</h1>
+            <ul>
+                <li>Contact</li>
+                <li>About</li>
+                <li>Products</li>
+                <li>Home</li>
+            </ul>
+        </nav>
     </header>
 
-    <section>
-        <h1>Click one product</h1>
-        <ul>
-            <li><img id="product1" /></li>
-            <li><img id="product2" /></li>
-            <li><img id="product3" /></li>
-        </ul>
-    </section>
+    <main>
+        <ul id="results">Results:</ul>    
+        <section>
+            <ul>
+                <h2>Select your favorite</h2>
+                <li>
+                    <img id="product1" />
+                    <fieldset>
+                        <label for="name">Select</label>
+                        <p><input type="radio" /></p>
+                    </fieldset>
+                </li>
+                <li>
+                    <img id="product2" />
+                    <fieldset>
+                        <label for="name">Select</label>
+                        <p><input type="radio" /></p>
+                    </fieldset>
+                </li>
+                <li>
+                    <img id="product3" />
+                    <fieldset>
+                            <label for="name">Select</label>
+                            <p><input type="radio" /></p>
+                    </fieldset>
+                </li>
+            </ul>
+            <button type="submit" id="vote">Vote</button>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum fermentum enim. Nunc eros neque, auctor et dolor a, rhoncus tempus turpis. Vivamus consequat diam vitae imperdiet accumsan. Vivamus eu leo eu lorem lacinia ullamcorper eget fringilla nisi. Donec malesuada, nibh sed feugiat lacinia, felis sem auctor sem, nec facilisis velit massa nec leo. Proin varius, turpis et mollis eleifend, tellus turpis eleifend leo, at consectetur ipsum felis ut nulla. Morbi in semper libero.</p>
+        </section> 
+    </main>
+
+    <footer>Footer goes here</footer>
 
 <script src="js/app.js"></script>
 

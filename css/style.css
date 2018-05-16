@@ -43,6 +43,10 @@ section {
     display: inline-block;
 }
 
+section img {
+    width: 200px;
+}
+
 #results {
     /* height: 300px; */
     /* margin: 20px; */

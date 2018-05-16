@@ -1,108 +1,191 @@
 'use strict';
+// Global Variables
+var allPictures = [];
 
-// global variables
-var allProducts = [];
+var img1 = document.getElementById('image-1');
+var img2 = document.getElementById('image-2');
+var img3 = document.getElementById('image-3');
+var sectionEl = document.getElementById('click-tracker-container');
+var resultUl = document.getElementById('product-result-container');
 
-var imgEl1 = document.getElementById('product1');
-var imgEl2 = document.getElementById('product2');
-var imgEl3 = document.getElementById('product3');
+var picture1index = 0;
+var picture2index = 0;
+var picture3index = 0;
 
-var product1Index = 0;
-var product2Index = 0;
-var product3Index = 0;
-// --------------------------------------------------
+var totalClicks = 0;
+// =========== Chart
+var voteChart = [];
+var busName = [];
 
-// object constructor for products
-function Product (src, name) {
-    this.src = src; // url to image file
-    this.name = name; // product name
-    this.shown = 0;
-    this.clicked = 0;
-    allProducts.push(this); // pushes information into allProducts array
+//=============================
+function Picture(src, name) {
+  this.url = src;
+  this.name = name;
+  this.clicked = 0;
+
+  allPictures.push(this);
 }
 
-// eventListener to count how many times a product in product1index is shown
-imgEl1.addEventListener('load', function(){
-    allProducts[product1Index].shown++;
-})
-
-// eventListener to count how many times a product in product2index is shown
-imgEl1.addEventListener('load', function(){
-    allProducts[product2Index].shown++;
-})
-
-// eventListener to count how many times a product in product3index is shown
-imgEl1.addEventListener('load', function(){
-    allProducts[product3Index].shown++;
-})
-
-// eventListener to count how many times a product in product1index is clicked on
-imgEl1.addEventListener('click', function(){
-    // allProducts[product1Index].shown++;
-    allProducts[product1Index].clicked++;
-    // if (allProducts[product1Index].clicked === 2){
-    //     alert('2 clicks');
-    //     }
-    // console.log(allProducts[product1Index].clicked)
-    // chooseNewProduct function runs when item 1 is clicked on
-    chooseNewProduct();
-})
-
-// eventListener to count how many times a product in product2index is clicked on
-imgEl2.addEventListener('click', function(){
-    // allProducts[product1Index].shown++;
-    allProducts[product2Index].clicked++;
-    // chooseNewProduct function runs when item 2 is clicked on
-    chooseNewProduct();
-})
-
-// eventListener to count how many times a product in product3index is clicked on
-imgEl3.addEventListener('click', function(){
-    // allProducts[product1Index].shown++;
-    allProducts[product3Index].clicked++;
-    // chooseNewProduct function runs when item 3 is clicked on
-    chooseNewProduct();
-})
-
-// function randomly displays images in each of the three containers
-function chooseNewProduct(){
-    product1Index = Math.floor(Math.random() * allProducts.length);
-    imgEl1.src = allProducts[product1Index].src;
-    product2Index = Math.floor(Math.random() * allProducts.length);
-    imgEl2.src = allProducts[product2Index].src;
-    product3Index = Math.floor(Math.random() * allProducts.length);
-    imgEl3.src = allProducts[product3Index].src;
+function updateChartArrays() {
+  for (var i = 0; i < allPictures.length; i++) {
+    // console.log(allPictures);
+    busName[i] = allPictures[i].name;
+    voteChart[i] = allPictures[i].clicked;
+  }
 }
 
-
-
-function calcTotalClicksPerIndex(){
-    var totalClicksPerIndex = 0;
-    for (var i in allProducts){
-        console.log(allProducts[i].clicked);
-        for (var j in allProducts){
-            console.log(allProducts[j].clicked);
-            totalClicksPerIndex += allProducts[j][i].clicked;
-            console.log('success');
-        }
+function busMallVote(thisPicture) {
+  for (var i = 0; i < allPictures.length; i++) {
+    if (thisPicture === allPictures[i].clicked) {
+      allPictures[i].voteChart++;
+      updateChartArrays();
     }
+  }
 }
 
+//Event Listeners
+sectionEl.addEventListener('click', sectionCallback);
 
+function sectionCallback(event) {
+  checkTotalClicks();
 
-// create new product objects
-new Product('img/bag.jpg', 'R2D2 suitcase');
-new Product('img/banana.jpg', 'Banana slicer');
-new Product('img/bathroom.jpg', 'Bathroom iPad stand');
-new Product('img/boots.jpg', 'Boots');
-new Product('img/breakfast.jpg', 'Breakfast');
-new Product('img/bubblegum.jpg', 'Meatball bubble gum');
-new Product('img/chair.jpg', 'chair');
-new Product('img/cthulhu.jpg', 'Cthulhu');
-new Product('img/dog-duck.jpg', 'Dog duck');
-new Product('img/pen.jpg', 'pen');
-new Product('img/pet-sweep.jpg', 'pet-sweep');
-new Product('img/scissors.jpg', 'scissors');
+  if(event.target.id){
+    totalClicks++;
+    allPictures[event.target.id].clicked++;
 
-chooseNewProduct();
-calcTotalClicksPerIndex();
+    chooseNewPictures();
+  } else {
+    alert('click on an image');
+  }
+}
+
+document.getElementById('click-tracker-container').addEventListener('click', function(event) {
+  if (event.target.id !== 'click-tracker-container') {
+    busMallVote(event.target.id);
+  }
+});
+
+// Helper functions
+// =============new pictures ======================
+function chooseNewPictures() {
+
+  var cantBeThis = [picture1index, picture2index, picture3index];
+  // var previous1 = picture1index; // 0
+  // var previous2 = picture2index; // 1
+  // var previous3 = picture3index; // 2
+
+  do{
+    picture1index = Math.floor(Math.random() * allPictures.length);
+  } while (cantBeThis.includes(picture1index));
+  cantBeThis.push(picture1index);
+
+  do{
+    picture2index = Math.floor(Math.random() * allPictures.length);
+  } while (cantBeThis.includes(picture2index));
+  cantBeThis.push(picture2index);
+
+  do {
+    picture3index = Math.floor(Math.random() * allPictures.length);
+  } while (cantBeThis.includes(picture3index));
+
+  img1.src = allPictures[picture1index].url;
+  img1.id = picture1index; //sets the image id = to the reference of its corresponding object's position in the array of all images
+  img2.src = allPictures[picture2index].url;
+  img2.id = picture2index;
+  img3.src = allPictures[picture3index].url;
+  img3.id = picture3index;
+}
+
+//==================
+
+function renderResults(){
+  for(var i in allPictures){
+    var newLiEl = document.createElement('li');
+    newLiEl.textContent = allPictures[i].name + ' clicked : ' + allPictures[i].clicked + ' Times';
+    resultUl.appendChild(newLiEl);
+  }
+}
+
+function checkTotalClicks() {
+  if(totalClicks === 25){
+    drawChart();
+    // renderResults();
+    sectionEl.removeEventListener('click', sectionCallback);
+  }
+}
+
+new Picture('img/bag.jpg', 'bag');
+new Picture('img/banana.jpg', 'banana');
+new Picture('img/bathroom.jpg', 'bathroom');
+new Picture('img/boots.jpg', 'boots');
+new Picture('img/breakfast.jpg', 'breakfast');
+new Picture('img/bubblegum.jpg', 'bubblegum');
+new Picture('img/chair.jpg', 'chair');
+new Picture('img/cthulhu.jpg', 'cthulhu');
+new Picture('img/dog-duck.jpg', 'dog-duck');
+new Picture('img/dragon.jpg', 'dragon');
+new Picture('img/pen.jpg', 'pen');
+new Picture('img/pet-sweep.jpg', 'pet-sweep');
+new Picture('img/scissors.jpg', 'scissors');
+new Picture('img/shark.jpg', 'shark');
+new Picture('img/sweep.png', 'sweep');
+new Picture('img/tauntaun.jpg', 'tauntaun');
+new Picture('img/unicorn.jpg', 'unicorn');
+new Picture('img/usb.gif', 'usb');
+new Picture('img/water-can.jpg', 'water-can');
+new Picture('img/wine-glass.jpg', 'wine-glass');
+
+chooseNewPictures();
+
+function drawChart() {
+  updateChartArrays();
+
+  var data = {
+    labels: busName, // titles array we declared earlier
+    datasets: [{
+      label: '# of clicks on each product',
+      data: voteChart, // votes array we declared earlier
+      backgroundColor: [
+        'black', 'black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black',
+      ],
+      hoverBackgroundColor: [
+        'blue', 'blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue',
+      ]
+    }]
+  };
+
+  var ctx = document.getElementById('busMallResults').getContext('2d');
+  var busMallResults = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: data,
+    options: {
+      responsive: false,
+      animation: {
+        duration: 1000,
+        easing: 'easeOutBounce'
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          max: 10,
+          min: 0,
+          stepSize: 1.0,
+          scaleOverride: true,
+          scaleStartValue: 0,
+          scaleSteps: 15,
+        }
+      }],
+      xAxes: [{
+        ticks: {
+          max: 10,
+          min: 0,
+          stepSize: 1.0,
+          scaleOverride: true,
+          scaleStartValue: 0,
+          scaleSteps: 15,
+        }
+      }],
+    }
+  });
+}

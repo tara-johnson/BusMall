@@ -24,6 +24,33 @@ function Picture(src, name) {
   this.clicked = 0;
 
   allPictures.push(this);
+};
+
+if (localStorage.allPictures){
+    allPictures = JSON.parse(localStorage.getItem('allPictures'));
+    console.log('Pulled from local storage');
+} else {
+    console.log('Push to local storage');
+    new Picture('img/bag.jpg', 'bag');
+    new Picture('img/banana.jpg', 'banana');
+    new Picture('img/bathroom.jpg', 'bathroom');
+    new Picture('img/boots.jpg', 'boots');
+    new Picture('img/breakfast.jpg', 'breakfast');
+    new Picture('img/bubblegum.jpg', 'bubblegum');
+    new Picture('img/chair.jpg', 'chair');
+    new Picture('img/cthulhu.jpg', 'cthulhu');
+    new Picture('img/dog-duck.jpg', 'dog-duck');
+    new Picture('img/dragon.jpg', 'dragon');
+    new Picture('img/pen.jpg', 'pen');
+    new Picture('img/pet-sweep.jpg', 'pet-sweep');
+    new Picture('img/scissors.jpg', 'scissors');
+    new Picture('img/shark.jpg', 'shark');
+    new Picture('img/sweep.png', 'sweep');
+    new Picture('img/tauntaun.jpg', 'tauntaun');
+    new Picture('img/unicorn.jpg', 'unicorn');
+    new Picture('img/usb.gif', 'usb');
+    new Picture('img/water-can.jpg', 'water-can');
+    new Picture('img/wine-glass.jpg', 'wine-glass');
 }
 
 function updateChartArrays() {
@@ -32,7 +59,7 @@ function updateChartArrays() {
     busName[i] = allPictures[i].name;
     voteChart[i] = allPictures[i].clicked;
   }
-}
+};
 
 function busMallVote(thisPicture) {
   for (var i = 0; i < allPictures.length; i++) {
@@ -41,18 +68,27 @@ function busMallVote(thisPicture) {
       updateChartArrays();
     }
   }
-}
+};
+
+function supports_html5_storage() {
+    try {
+      return 'localStorage' in window && window['localStorage'] !== null;
+    } catch (e) {
+      return false;
+    }
+  };
+
+supports_html5_storage();
 
 //Event Listeners
 sectionEl.addEventListener('click', sectionCallback);
 
 function sectionCallback(event) {
-  checkTotalClicks();
 
   if(event.target.id){
     totalClicks++;
     allPictures[event.target.id].clicked++;
-
+    checkTotalClicks();
     chooseNewPictures();
   } else {
     alert('click on an image');
@@ -110,30 +146,11 @@ function checkTotalClicks() {
   if(totalClicks === 25){
     drawChart();
     // renderResults();
+    localStorage.setItem('allPictures', JSON.stringify(allPictures));
+    console.log('Push to local storage after 25 clicks');
     sectionEl.removeEventListener('click', sectionCallback);
   }
 }
-
-new Picture('img/bag.jpg', 'bag');
-new Picture('img/banana.jpg', 'banana');
-new Picture('img/bathroom.jpg', 'bathroom');
-new Picture('img/boots.jpg', 'boots');
-new Picture('img/breakfast.jpg', 'breakfast');
-new Picture('img/bubblegum.jpg', 'bubblegum');
-new Picture('img/chair.jpg', 'chair');
-new Picture('img/cthulhu.jpg', 'cthulhu');
-new Picture('img/dog-duck.jpg', 'dog-duck');
-new Picture('img/dragon.jpg', 'dragon');
-new Picture('img/pen.jpg', 'pen');
-new Picture('img/pet-sweep.jpg', 'pet-sweep');
-new Picture('img/scissors.jpg', 'scissors');
-new Picture('img/shark.jpg', 'shark');
-new Picture('img/sweep.png', 'sweep');
-new Picture('img/tauntaun.jpg', 'tauntaun');
-new Picture('img/unicorn.jpg', 'unicorn');
-new Picture('img/usb.gif', 'usb');
-new Picture('img/water-can.jpg', 'water-can');
-new Picture('img/wine-glass.jpg', 'wine-glass');
 
 chooseNewPictures();
 

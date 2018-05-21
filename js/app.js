@@ -26,31 +26,31 @@ function Picture(src, name) {
   allPictures.push(this);
 };
 
-if (localStorage.allPictures){
-    allPictures = JSON.parse(localStorage.getItem('allPictures'));
-    console.log('Pulled from local storage');
+if (localStorage.allPictures) {
+  allPictures = JSON.parse(localStorage.getItem('allPictures'));
+  console.log('Pulled from local storage');
 } else {
-    console.log('Push to local storage');
-    new Picture('img/bag.jpg', 'bag');
-    new Picture('img/banana.jpg', 'banana');
-    new Picture('img/bathroom.jpg', 'bathroom');
-    new Picture('img/boots.jpg', 'boots');
-    new Picture('img/breakfast.jpg', 'breakfast');
-    new Picture('img/bubblegum.jpg', 'bubblegum');
-    new Picture('img/chair.jpg', 'chair');
-    new Picture('img/cthulhu.jpg', 'cthulhu');
-    new Picture('img/dog-duck.jpg', 'dog-duck');
-    new Picture('img/dragon.jpg', 'dragon');
-    new Picture('img/pen.jpg', 'pen');
-    new Picture('img/pet-sweep.jpg', 'pet-sweep');
-    new Picture('img/scissors.jpg', 'scissors');
-    new Picture('img/shark.jpg', 'shark');
-    new Picture('img/sweep.png', 'sweep');
-    new Picture('img/tauntaun.jpg', 'tauntaun');
-    new Picture('img/unicorn.jpg', 'unicorn');
-    new Picture('img/usb.gif', 'usb');
-    new Picture('img/water-can.jpg', 'water-can');
-    new Picture('img/wine-glass.jpg', 'wine-glass');
+  console.log('Push to local storage');
+  new Picture('img/bag.jpg', 'bag');
+  new Picture('img/banana.jpg', 'banana');
+  new Picture('img/bathroom.jpg', 'bathroom');
+  new Picture('img/boots.jpg', 'boots');
+  new Picture('img/breakfast.jpg', 'breakfast');
+  new Picture('img/bubblegum.jpg', 'bubblegum');
+  new Picture('img/chair.jpg', 'chair');
+  new Picture('img/cthulhu.jpg', 'cthulhu');
+  new Picture('img/dog-duck.jpg', 'dog-duck');
+  new Picture('img/dragon.jpg', 'dragon');
+  new Picture('img/pen.jpg', 'pen');
+  new Picture('img/pet-sweep.jpg', 'pet-sweep');
+  new Picture('img/scissors.jpg', 'scissors');
+  new Picture('img/shark.jpg', 'shark');
+  new Picture('img/sweep.png', 'sweep');
+  new Picture('img/tauntaun.jpg', 'tauntaun');
+  new Picture('img/unicorn.jpg', 'unicorn');
+  new Picture('img/usb.gif', 'usb');
+  new Picture('img/water-can.jpg', 'water-can');
+  new Picture('img/wine-glass.jpg', 'wine-glass');
 }
 
 function updateChartArrays() {
@@ -71,12 +71,12 @@ function busMallVote(thisPicture) {
 };
 
 function supports_html5_storage() {
-    try {
-      return 'localStorage' in window && window['localStorage'] !== null;
-    } catch (e) {
-      return false;
-    }
-  };
+  try {
+    return 'localStorage' in window && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
+};
 
 supports_html5_storage();
 
@@ -85,7 +85,7 @@ sectionEl.addEventListener('click', sectionCallback);
 
 function sectionCallback(event) {
 
-  if(event.target.id){
+  if (event.target.id) {
     totalClicks++;
     allPictures[event.target.id].clicked++;
     checkTotalClicks();
@@ -95,7 +95,7 @@ function sectionCallback(event) {
   }
 }
 
-document.getElementById('click-tracker-container').addEventListener('click', function(event) {
+document.getElementById('click-tracker-container').addEventListener('click', function (event) {
   if (event.target.id !== 'click-tracker-container') {
     busMallVote(event.target.id);
   }
@@ -110,12 +110,12 @@ function chooseNewPictures() {
   // var previous2 = picture2index; // 1
   // var previous3 = picture3index; // 2
 
-  do{
+  do {
     picture1index = Math.floor(Math.random() * allPictures.length);
   } while (cantBeThis.includes(picture1index));
   cantBeThis.push(picture1index);
 
-  do{
+  do {
     picture2index = Math.floor(Math.random() * allPictures.length);
   } while (cantBeThis.includes(picture2index));
   cantBeThis.push(picture2index);
@@ -134,8 +134,8 @@ function chooseNewPictures() {
 
 //==================
 
-function renderResults(){
-  for(var i in allPictures){
+function renderResults() {
+  for (var i in allPictures) {
     var newLiEl = document.createElement('li');
     newLiEl.textContent = allPictures[i].name + ' clicked : ' + allPictures[i].clicked + ' Times';
     resultUl.appendChild(newLiEl);
@@ -143,7 +143,7 @@ function renderResults(){
 }
 
 function checkTotalClicks() {
-  if(totalClicks === 25){
+  if (totalClicks === 25) {
     drawChart();
     // renderResults();
     localStorage.setItem('allPictures', JSON.stringify(allPictures));
@@ -163,10 +163,10 @@ function drawChart() {
       label: '# of clicks on each product',
       data: voteChart, // votes array we declared earlier
       backgroundColor: [
-        'black', 'black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black','black',
+        '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730', '#443730',
       ],
       hoverBackgroundColor: [
-        'blue', 'blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue','blue',
+        '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18', '#550C18',
       ]
     }]
   };
@@ -176,7 +176,13 @@ function drawChart() {
     type: 'horizontalBar',
     data: data,
     options: {
-      responsive: false,
+      // responsive: false,
+      legend: {
+        labels: {
+          fontColor: "#443730",
+          fontSize: 18,
+        }
+      },
       animation: {
         duration: 1000,
         easing: 'easeOutBounce'
@@ -185,6 +191,7 @@ function drawChart() {
     scales: {
       yAxes: [{
         ticks: {
+          fontColor: "white",
           max: 10,
           min: 0,
           stepSize: 1.0,
@@ -195,6 +202,7 @@ function drawChart() {
       }],
       xAxes: [{
         ticks: {
+          fontColor: "white",
           max: 10,
           min: 0,
           stepSize: 1.0,

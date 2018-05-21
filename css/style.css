@@ -1,93 +1,65 @@
+/* -------------------- */
+/* HEADER STYLES */
+/* -------------------- */
+
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Header styles */
-/* header {
-    border: 1px solid cyan;
-} */
+header {
+    height: 100px;
+    background: #ccc;
+    box-shadow: 5px 10px 18px #888;
+}
 
 nav {
     width: 960px;
     margin: 0px auto;
+    /* border: 3px solid yellow; */
 }
 
-nav h1 {
-    font-size: 24px;
-    display: inline-block;
+nav div {
+    float: left;
+    margin-top: 24px;
+    margin-right: 190px;
+    font-family: 'Exo', sans-serif;
+    font-size: 50px;
+    /* border: 3px solid yellow; */
 }
 
-nav ul {
-    display: inline-block;
-    float: right;
-    margin: 45px 0px 0px 0px;
+.navsubtext {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
 }
 
 nav li {
     display: inline-block;
-    margin: 0px 20px 0px 0px;
-    padding: 0px 20px;
-    /* border: 1px solid black; */
+    width: 130px;
+    margin: 44px 0px 0px 5px;
+    background: #444;
+    /* padding: 20px; */
+    border-radius: 10px 10px 0px 0px;
+    text-align: center;
+    color: #fff;
+    /* border: 3px solid yellow; */
 }
 
-/* Main styles */
-main {
-    width: 960px;
-    margin: 0px auto;
-    /* border: 1px solid red; */
+nav li a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 20px;
 }
 
-section {
-    /* border: 1px solid greenyellow; */
-    /* margin: 20px; */
-    display: inline-block;
+nav li:hover {
+    background: orange;
+}
+
+.header-rule {
+    height: 5px;
+    background: orange;
 }
 
 section img {
     width: 200px;
-}
-
-#results {
-    /* height: 300px; */
-    /* margin: 20px; */
-    /* padding: 20px 0px 20px 0px; */
-    /* border: 1px solid black; */
-    float: left;
-    width: 225px;
-}
-
-#voting {
-    width: 700px;
-}
-
-.voting {
-    width: 700px;
-    float: right;
-}
-
-.image-display {
-    display: inline-block;
-}
-
-section li {
-    display: inline-block;
-    border: 1px solid black;
-    text-align: center;
-}
-
-img {
-    width: 200px;
-}
-
-button {
-    width: 300px;
-    /* border: 1px solid orange; */
-}
-
-/* Footer styles */
-footer {
-    height: 100px;
-    /* border: 1px solid green; */
-    text-align: center;
-    clear: both;
 }
